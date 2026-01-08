@@ -1,15 +1,18 @@
 public class HealthRecord {
-    private int height;
+    private int height,sum,i;
     private static final int MIN_PERMITTED_HEIGHT = 50;
     private static final int MAX_PERMITTED_HEIGHT = 175;
     private static final int DEFAULT_HEIGHT = 100;
 
     // TODO: 1 Think about the initial value for maximum and minimum height
     private static int tallestHeight = 0 ;
-    private static int shortestHeight = 999 ;
+    private static int shortestHeight = 0 ;
+    private static int counter = 0;
+    private static double averageHeight = 0;
 
     public HealthRecord(int height) {
         setHeight(height);
+        counter ++;
     }
     public void setHeight(int height) {
 
@@ -19,7 +22,13 @@ public class HealthRecord {
         else
             this.height = DEFAULT_HEIGHT ;
 
+        averageHeight = ((averageHeight*counter)+this.height)/(counter+1) ;
+
         // TODO: 3 Update the tallest and shortest height
+        if(tallestHeight == 0 && shortestHeight == 0){
+            tallestHeight = this.height;
+            shortestHeight = this.height;
+        }
         if ( this.height > tallestHeight )
             tallestHeight = this.height ;
         if ( this.height < shortestHeight )
@@ -38,11 +47,16 @@ public class HealthRecord {
         return HealthRecord.shortestHeight;
     }
 
+    public static double getAverageHeight() {
+        return HealthRecord.averageHeight;
+    }
+
     public void displayDetails() {
         System.out.println("Height (cm): " + getHeight());
     }
     public static void displayClassDetails() {
         System.out.println("The tallest height (cm): " + getTallestHeight());
         System.out.println("The shortest height (cm): " + getShortestHeight());
+        System.out.printf("The average height (cm): %.2f",getAverageHeight());
     }
 }
