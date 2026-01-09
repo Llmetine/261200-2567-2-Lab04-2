@@ -1,5 +1,5 @@
 public class HealthRecord {
-    private int height,sum,i;
+    private int height;
     private static final int MIN_PERMITTED_HEIGHT = 50;
     private static final int MAX_PERMITTED_HEIGHT = 175;
     private static final int DEFAULT_HEIGHT = 100;
